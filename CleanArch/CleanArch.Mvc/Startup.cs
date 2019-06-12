@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using CleanArch.Mvc.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CleanArch.Infra.Data.Context;
 
 namespace CleanArch.Mvc
 {
@@ -41,6 +42,9 @@ namespace CleanArch.Mvc
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<UniversityDBContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("UniversityDbConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
